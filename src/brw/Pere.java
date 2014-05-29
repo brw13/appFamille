@@ -8,35 +8,40 @@ import java.util.List;
  */
 public class Pere extends Homme {
 
-    private List enfants = new ArrayList<Personne>();
+    private ArrayList<Personne> enfants = new ArrayList<Personne>();
 
     public Pere(String nom, String prenom) {
         super(nom, prenom);
-        this.enfants = null;
     }
 
-    public List<Personne> getEnfants() {
-        return enfants;
+    public ArrayList<Personne> getEnfants() {
+        return this.enfants;
     }
 
     public void setEnfants(Personne personne) {
-        if (personne instanceof Fils){
-            try {
-                this.enfants.add((Fils)personne);
-                return;
-            } catch (Exception e) {
-                System.out.println("Erreur d'ajout du Fils!!! ");
-                e.printStackTrace();
+        ArrayList<Personne> childs = this.getEnfants();
+
+        if (childs.contains(personne) == false) {
+            if (personne instanceof Fils) {
+                try {
+                    childs.add((Fils) personne);
+                    return;
+                } catch (Exception e) {
+                    System.out.println("Erreur d'ajout du Fils!!! ");
+                    e.printStackTrace();
+                }
+            } else {
+                if (personne instanceof Fille) {
+                    try {
+                         childs.add((Fille) personne);
+                         return;
+                    } catch (Exception e) {
+                        System.out.println("Erreur d'ajout de la fille!!! ");
+                        e.printStackTrace();
+                    }
+                }
             }
-        }else if (personne instanceof Fille){
-            try {
-                this.enfants.add((Fille)personne);
-                return;
-            } catch (Exception e) {
-                System.out.println("Erreur d'ajout de la fille!!! ");
-                e.printStackTrace();
-            }
-        }
-        return;
+            return;
+        } else return;// la personne existe deja dans la liste des enfants
     }
 }

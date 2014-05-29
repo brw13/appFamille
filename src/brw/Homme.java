@@ -7,7 +7,7 @@ import java.util.List;
  * Created by majid on 19/01/14.
  */
 public class Homme extends Personne {
-    private List<Femme> femmes;
+    private ArrayList<Femme> femmes;
 
     public Homme(String nom, String prenom) {
         super(nom, prenom);
@@ -15,19 +15,20 @@ public class Homme extends Personne {
         this.femmes = new ArrayList<Femme>();
     }
 
-    public List<Femme> getFemmes() {
+    public ArrayList<Femme> getFemmes() {
         return femmes;
     }
 
     public void setFemmes(Femme femme) {
         this.femmes.add(femme);
+        femme.setMariee(true);
     }
 
-    public void addFemme(Femme femme) throws IllegalArgumentException{
+    public void addFemme(Femme femme) throws IllegalArgumentException {
         if (this.getSexe() == "Homme") {
-            if ((this.getFemmes().contains(femme) == true) || (femme.isMariee() == true)){
-                System.out.println(" La Femme "+femme.getPrenom()+" "+femme.getNom().toUpperCase()+" est déjà mariée!");
-            }else {
+            if ((this.getFemmes().contains(femme) == true) || (femme.isMariee() == true)) {
+                System.out.println(" La Femme " + femme.getPrenom() + " " + femme.getNom().toUpperCase() + " est déjà mariée!");
+            } else {
                 try {
                     this.setFemmes(femme);
                 } catch (Exception e) {
